@@ -22,5 +22,5 @@ vim.api.nvim_set_keymap(
   { noremap = true, silent = true, desc = "Поиск файлов" }
 )
 
-vim.api.nvim_set_keymap("n", "<C-h>", ":bprevious<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<C-l>", ":bnext<CR>", { noremap = true, silent = true })
+vim.opt.ignorecase = true
+vim.opt.smartcase = true

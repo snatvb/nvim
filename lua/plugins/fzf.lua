@@ -105,7 +105,7 @@ local opts = function(_, opts)
     },
     files = {
       cwd_prompt = false,
-      cmd = "fd --type f --hidden --exclude .git --exclude node_modules --exclude dist",
+      cmd = "fd --type f --hidden --exclude .git --exclude node_modules --exclude _dist --exclude _dev --exclude dist --exclude *.lock",
       actions = {
         ["alt-i"] = { actions.toggle_ignore },
         ["alt-h"] = { actions.toggle_hidden },

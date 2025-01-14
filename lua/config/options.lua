@@ -4,3 +4,4 @@
 
 vim.o.background = "dark"
 vim.opt.termguicolors = true
+vim.g.lazyvim_rust_diagnostics = "rust-analyzer"

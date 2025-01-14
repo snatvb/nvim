@@ -32,7 +32,10 @@ return {
     config = function()
       require("telescope").setup({
         defaults = {
-          -- Настройки по умолчанию
+          file_ignore_patterns = {
+            "node_modules/*",
+            "_dist/*",
+          },
         },
         pickers = {
           find_files = {
