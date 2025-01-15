@@ -24,3 +24,6 @@ vim.api.nvim_set_keymap(
 
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
+
+vim.cmd("nmap j gj")
+vim.cmd("nmap k gk")
