@@ -5,3 +5,5 @@
 vim.o.background = "dark"
 vim.opt.termguicolors = true
 vim.g.lazyvim_rust_diagnostics = "rust-analyzer"
+vim.opt.ignorecase = true
+vim.opt.smartcase = true

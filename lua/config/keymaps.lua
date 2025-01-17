@@ -6,7 +6,7 @@ vim.api.nvim_set_keymap("n", "<leader>j", ":HopWord<CR>", { noremap = true, sile
 
 vim.opt.clipboard = "unnamedplus"
 
-vim.api.nvim_set_keymap("n", "<leader>R", "<cmd>lua vim.lsp.buf.rename()<CR>", { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap("n", "<leader>R", "<cmd>lua vim.lsp.buf.rename()<CR>", { noremap = true, silent = true })
 
 vim.api.nvim_set_keymap(
   "n",
@@ -22,8 +22,79 @@ vim.api.nvim_set_keymap(
   { noremap = true, silent = true, desc = "Поиск файлов" }
 )
 
-vim.opt.ignorecase = true
-vim.opt.smartcase = true
+vim.keymap.set("v", "<leader>r", '"_dP<Ecs>', { desc = "Replace selection with clipboard" })
 
-vim.cmd("nmap j gj")
-vim.cmd("nmap k gk")
+if vim.env.VSCODE_IPC_HOOK then
+  local vscode = require("vscode")
+  vim.notify = vscode.notify
+  vim.cmd("nmap j gj")
+  vim.cmd("nmap k gk")
+
+  vim.keymap.set({ "n", "x", "i" }, "<C-d>", function()
+    vscode.with_insert(function()
+      vscode.action("editor.action.addSelectionToNextFindMatch")
+    end)
+  end)
+
+  vim.keymap.set("n", "<leader>e", function()
+    vscode.action("workbench.view.explorer")
+  end, { desc = "Open VSCode Explorer" })
+
+  vim.keymap.set("n", "<C-^>", function()
+    vscode.action("workbench.action.navigateBack")
+  end, { desc = "Go back to previous location" })
+  vim.keymap.set("n", "<C-6>", function()
+    vscode.action("workbench.action.navigateBack")
+  end, { desc = "Go back to previous location" })
+
+  vim.keymap.set("n", "<leader>ca", function()
+    vscode.action("editor.action.quickFix")
+  end, { desc = "Code Action" })
+  vim.keymap.set("n", "<leader>cA", function()
+    vscode.action("editor.action.sourceAction")
+  end, { desc = "Source Action" })
+  vim.keymap.set("n", "<leader>cc", function()
+    vscode.action("editor.action.runCodeLens")
+  end, { desc = "Run Codelens" })
+  vim.keymap.set("n", "<leader>cC", function()
+    vscode.action("editor.action.inlineValues")
+  end, { desc = "Refresh & Display Codelens" })
+  vim.keymap.set("n", "<leader>cl", function()
+    vscode.action("workbench.action.showLspInfo")
+  end, { desc = "LSP Info" })
+  vim.keymap.set("n", "<leader>cr", function()
+    vscode.action("editor.action.rename")
+  end, { desc = "Rename" })
+  vim.keymap.set("n", "<leader>cR", function()
+    vscode.action("workbench.files.action.renameFile")
+  end, { desc = "Rename File" })
+  vim.keymap.set("n", "<leader>cf", function()
+    vscode.action("editor.action.formatDocument")
+  end, { desc = "Format Document" })
+  vim.keymap.set("n", "<leader>cF", function()
+    vscode.action("editor.action.formatSelection")
+  end, { desc = "Format Selected Text" })
+  vim.keymap.set("n", "<leader>cd", function()
+    vscode.action("workbench.actions.view.problems")
+  end, { desc = "Open Problems Panel" })
+
+  vim.keymap.set("n", "zM", function()
+    vscode.action("editor.foldAll")
+  end, { desc = "Close all folds" })
+  vim.keymap.set("n", "zR", function()
+    vscode.action("editor.unfoldAll")
+  end, { desc = "Open all folds" })
+  vim.keymap.set("n", "za", function()
+    vscode.action("editor.toggleFold")
+  end, { desc = "Toggle fold under cursor" })
+  vim.keymap.set("n", "zA", function()
+    vscode.action("editor.foldLevel2")
+  end, { desc = "Toggle fold in the whole block under cursor" })
+
+  vim.keymap.set("n", "<leader>bd", function()
+    vscode.action("workbench.action.closeActiveEditor")
+  end, { desc = "Close current file" })
+  vim.keymap.set("n", "<leader>,", function()
+    vscode.action("workbench.action.quickOpen")
+  end, { desc = "Show all open buffers (Quick Open)" })
+end
