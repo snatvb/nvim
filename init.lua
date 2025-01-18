@@ -2,5 +2,5 @@
 require("config.lazy")
 
 if vim.env.VSCODE_IPC_HOOK then
-  require("config.vscode-cfg")
+    require("config.vscode-cfg")
 end
