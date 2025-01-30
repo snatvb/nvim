@@ -4,6 +4,7 @@ local state = {
   floating = {
     buf = -1,
     win = -1,
+    created = nil,
   },
 }
 
@@ -18,10 +19,12 @@ local function create_floating_window(opts)
 
   -- Create a buffer
   local buf = nil
+  local created = false
   if vim.api.nvim_buf_is_valid(opts.buf) then
     buf = opts.buf
   else
     buf = vim.api.nvim_create_buf(false, true) -- No file, scratch buffer
+    created = true
   end
 
   -- Define window configuration
@@ -38,18 +41,22 @@ local function create_floating_window(opts)
   -- Create the floating window
   local win = vim.api.nvim_open_win(buf, true, win_config)
 
-  return { buf = buf, win = win }
+  return { buf = buf, win = win, created = created }
 end
 
 local toggle_terminal = function()
   if not vim.api.nvim_win_is_valid(state.floating.win) then
     state.floating = create_floating_window({ buf = state.floating.buf })
+    if state.floating.created == false then
+      vim.cmd("startinsert")
+    end
     if vim.bo[state.floating.buf].buftype ~= "terminal" then
       vim.cmd.terminal()
       vim.defer_fn(function()
         local job_id = vim.b.terminal_job_id
         if job_id then
           vim.fn.chansend(job_id, "nu\nclear\n")
+          vim.cmd("startinsert")
         end
       end, 50)
     end
