@@ -9,6 +9,6 @@ vim.opt.smartcase = true
 vim.opt.backupcopy = "yes"
 
 if vim.fn.has("macunix") == 1 then
-    vim.opt.undodir = vim.fn.stdpath("cache") .. "/undo"
-    vim.opt.undofile = true
+  vim.opt.undodir = vim.fn.stdpath("cache") .. "/undo"
+  vim.opt.undofile = true
 end

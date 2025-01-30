@@ -1,3 +1,5 @@
+require("plugins/float-terminal")
+
 return {
   {
     "smoka7/hop.nvim",

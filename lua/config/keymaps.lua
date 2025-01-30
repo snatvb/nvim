@@ -23,3 +23,12 @@ vim.api.nvim_set_keymap(
 )
 
 vim.keymap.set("v", "<leader>r", '"_dP<Ecs>', { desc = "Replace selection with clipboard" })
+
+vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
+
+vim.api.nvim_set_keymap(
+  "n",
+  "<leader>t",
+  ":Floaterminal<CR>",
+  { desc = "Toggle floating terminal", noremap = true, silent = true }
+)
