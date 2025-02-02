@@ -2,7 +2,12 @@
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
 
-vim.api.nvim_set_keymap("n", "<leader>j", ":HopWord<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap(
+  "n",
+  "<leader>j",
+  ":HopWord<CR>",
+  { noremap = true, silent = true, desc = "Jump via tree sitter" }
+)
 
 vim.opt.clipboard = "unnamedplus"
 
@@ -22,7 +27,7 @@ vim.api.nvim_set_keymap(
   { noremap = true, silent = true, desc = "Поиск файлов" }
 )
 
-vim.keymap.set("v", "<leader>r", '"_dP<Ecs>', { desc = "Replace selection with clipboard" })
+-- vim.keymap.set("v", "<leader>r", '"_dP<Ecs>', { desc = "Replace selection with clipboard" })
 
 vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
